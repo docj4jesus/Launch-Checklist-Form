@@ -26,20 +26,26 @@ window.addEventListener("load", function() {
          faultyItems.style.visibility = "visible";
          pilotStatus.innerHTML = `${pilotName.value} is ready.`;
          copilotStatus.innerHTML = `${copilotName.value} is ready.`;
-         launchStatus.innerHTML = "Shuttle is ready for launch.";
-         launchStatus.style.color = "green";
-      
+
          if (Number(fuelLevel.value) < 10000) {
             fuelStatus.innerHTML = "There is not enough fuel for the journey.";
             launchStatus.innerHTML = "Shuttle not ready for launch.";
             launchStatus.style.color = "red";
-         } 
+         } else {
+            fuelStatus.innerHTML = "Fuel level high enough for launch."
+            launchStatus.innerHTML = "Shuttle is ready for launch.";
+            launchStatus.style.color = "green";
+         }
 
          if (Number(cargoMass.value) > 10000) {
             cargoStatus.innerHTML = "There is too much mass for the shuttle to take off.";
             launchStatus.innerHTML = "Shuttle not ready for launch.";
             launchStatus.style.color = "red";
-         } 
+         } else {
+            cargoStatus.innerHTML = "Cargo mass low enough for launch."
+            launchStatus.innerHTML = "Shuttle is ready for launch.";
+            launchStatus.style.color = "green";
+         }
       }
    });
 
