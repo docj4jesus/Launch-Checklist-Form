@@ -27,27 +27,51 @@ window.addEventListener("load", function() {
          pilotStatus.innerHTML = `${pilotName.value} is ready.`;
          copilotStatus.innerHTML = `${copilotName.value} is ready.`;
 
-         if (Number(fuelLevel.value) < 10000) {
+         if(Number(fuelLevel.value) < 10000 && Number(cargoMass.value) < 10000) {
             fuelStatus.innerHTML = "There is not enough fuel for the journey.";
+            cargoStatus.innerHTML = "Cargo mass low enough for launch.";
             launchStatus.innerHTML = "Shuttle not ready for launch.";
             launchStatus.style.color = "red";
-         } else {
-            fuelStatus.innerHTML = "Fuel level high enough for launch."
-            launchStatus.innerHTML = "Shuttle is ready for launch.";
-            launchStatus.style.color = "green";
-         }
 
-         if (Number(cargoMass.value) > 10000) {
+         } else if (Number(fuelLevel.value) > 10000 && Number(cargoMass.value) > 10000) {
+            fuelStatus.innerHTML = "Fuel level high enough for launch.";
             cargoStatus.innerHTML = "There is too much mass for the shuttle to take off.";
             launchStatus.innerHTML = "Shuttle not ready for launch.";
             launchStatus.style.color = "red";
+
+         } else if (Number(fuelLevel.value) < 10000 && Number(cargoMass.value) > 10000) {
+            fuelStatus.innerHTML = "There is not enough fuel for the journey.";
+            cargoStatus.innerHTML = "There is too much mass for the shuttle to take off.";
+            launchStatus.innerHTML = "Shuttle not ready for launch.";
+            launchStatus.style.color = "red";
+
          } else {
-            cargoStatus.innerHTML = "Cargo mass low enough for launch."
             launchStatus.innerHTML = "Shuttle is ready for launch.";
             launchStatus.style.color = "green";
          }
       }
    });
+
+//ORIGINAL CODE THAT DOES NOT QUITE WORK
+      //    if (Number(fuelLevel.value) < 10000) {
+      //       fuelStatus.innerHTML = "There is not enough fuel for the journey.";
+      //       launchStatus.innerHTML = "Shuttle not ready for launch.";
+      //       launchStatus.style.color = "red";
+      //    } else {
+      //       fuelStatus.innerHTML = "Fuel level high enough for launch."
+      //       launchStatus.innerHTML = "Shuttle is ready for launch.";
+      //       launchStatus.style.color = "green";
+      //    }
+
+      //    if (Number(cargoMass.value) > 10000) {
+      //       cargoStatus.innerHTML = "There is too much mass for the shuttle to take off.";
+      //       launchStatus.innerHTML = "Shuttle not ready for launch.";
+      //       launchStatus.style.color = "red";
+      //    } else {
+      //       cargoStatus.innerHTML = "Cargo mass low enough for launch."
+      //       launchStatus.innerHTML = "Shuttle is ready for launch.";
+      //       launchStatus.style.color = "green";
+      //    }
 
    fetch("https://handlers.education.launchcode.org/static/planets.json").then(function(response) {
       response.json().then(function(json) {
